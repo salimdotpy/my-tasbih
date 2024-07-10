@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Islamic Counter</title>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <link href="css/color.css" rel="stylesheet">
+    <style type="text/css">
+        *{
+            -webkit-user-select: none; /* Safari */
+            -ms-user-select: none; /* IE 10 and IE 11 */
+            user-select: none; /* Standard syntax */
+            font-family: cooper;
+        }
+        html {
+            position: relative;
+            min-width: 220px; width:13%;
+            min-height: 170px;
+            background: rgba(0,0,0,0);
+            border:solid 2px blue;
+            border-radius: 20px;
+        }
+        .container{
+            border: #00f 3px solid; padding: 0;
+            position: absolute;
+            margin: auto;  top: 0;
+            right: 0;  bottom: 0;  left: 0;
+            width: 210px; height: 160px;
+            border-radius: 20px;
+            background: #00f;
+            box-shadow: #00f 0px 0px 40px;
+        }
+        .u-con, .l-con{
+            border: #000 3px solid;
+        }
+        .u-con{
+            border-radius: 20px 20px 0  0;
+            padding: 10px;
+            padding-bottom:0px;
+        }
+        .l-con{
+            border-radius: 0  0 20px 20px;
+            padding: 0; margin: 0;
+        }
+        .l-con>[class*="col-"]{
+            padding: 0;
+        }
+        .d:active{
+            border:inset 2px  #fff;
+            background: radial-gradient(#ccc,#fff);
+        }
+        .app-name{
+            border-radius: 0 0 50px 0;
+            padding:0 0 0 17px;
+            font-size: 10px;
+            border: 5px #000 solid;
+            border-top: none;
+            border-left: none;
+        }
+        .l-con>.col-xs-4{
+            padding: 2px;
+        }
+        .span{
+            background: linear-gradient(90deg, #aaa, #00f);
+            padding: 0 2px; border: solid 1px #ccc;
+            border-radius: 5px; color: #fff;
+            font-size:10px;
+        }
+        div#display, .dis{
+            border-radius: 10px!important;
+            padding: 0px 5px;
+            font-size: 30px; border: solid 1px #ccc;
+        }
+        .dis{
+            width:178px;
+            display:block;
+            height:43px; font-size:14px;
+        }
+        .d{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            font-size: 20px;
+            font-weight:800;
+            border: outset 2px #fff;
+            background: radial-gradient(#fff,#ccc);
+        }
+        #reset, #set{
+            font-size: 10px;  width: 40px; margin-top: 5px;
+            height: 40px;margin-left:-20px;
+        }
+        b.badge{
+            position:absolute;
+            z-index:1;
+        }.xr, .yr{ right:0; }
+        .y{ bottom:0; }
+        body{ background:transparent; }
+    </style>
+</head>
+<body>
+    <span id="tool">
+        <b class="badge xr red" onclick="def.Close('Counter is hidden, click show to show it again!')">X</b>
+        <b class="badge gray mute">
+            <i class="fa fa-volume-up m1"></i>
+            <i class="fa fa-volume-off m0 hidden"></i>
+        </b>
+        <b class="badge yr y green"><i class="fa fa-hand-o-right"></i></b>
+        <a href="counter1.html">
+            <b class="badge yl y gray"><i class="fa fa-hand-o-left"></i></b>
+        </a>
+    </span>
+    <div class="container" onclick="">
+        <div class="u-con col-xs-12 text-center">
+            <div id="display" class=" white text-left">
+                <b id="ld">0</b>
+                <b id="rd" class="pull-right">0</b>
+            </div>
+            <div id="dis" class="text-bold dis hidden white text-left">
+                <span>
+                    <input type="radio" name="set" value="11">11
+                    <input type="radio" name="set" value="21">21
+                    <input type="radio" name="set" value="33" checked>33
+                    <input type="radio" name="set" value="100">100
+                </span>
+            </div>
+            <span class="span">
+                Powered by: Selim Adekola
+            </span>
+        </div>
+        <div class="l-con col-xs-12">
+            <div class="col-xs-8">
+                <div class="app-name white col-xs-12">
+                    <b>Tasbih Counter</b>
+                </div>
+                <div class="col-xs-12">
+                    <div class="col-xs-6">
+                        <span class="d" id="set" onclick="set()">Set</span>
+                    </div>
+                    <div class="col-xs-6">
+                        <span class="d" id="reset" onclick="resets()">Reset</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <span class="d" id="counts" onclick="count()">Count</span>
+            </div>
+        </div>
+    </div>
+
+    <audio hidden src="sound/add.ogg" id="add" autoplay></audio>
+    <audio hidden src="sound/success.ogg" id="suc"></audio>
+    <audio hidden src="sound/delete.ogg" id="del"></audio>
+    <audio hidden src="sound/error.ogg" id="err"></audio>
+
+    <script src="js/jquery-1.11.1.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script type="application/javascript">
+        var setMute = def.getDs(1).split('/')[0];
+        var db_color = def.getDs(2)? def.getDs(2) : "#00f";
+        $(document).ready(function() {
+            add.play();
+            setMute = def.getDs(1).split('/')[0];
+            if(setMute==0) mute = 0; /*else mute=1;*/
+            db_color = def.getDs(2)? def.getDs(2) : "#00f";
+            $('html, .container').css('border-color', db_color)
+            $('.container').css('box-shadow', `${db_color} 0px 0px 40px`).css('background', db_color)
+            $('.span').css('background', `linear-gradient(90deg, #aaa, ${db_color})`)
+          });
+        $('body').click(function() {
+            setMute = def.getDs(1).split('/')[0];
+            if(setMute==0) mute = 0; /*else mute=1;*/
+            db_color = def.getDs(2)? def.getDs(2) : "#00f";
+            $('html, .container').css('border-color', db_color)
+            $('.container').css('box-shadow', `${db_color} 0px 0px 40px`).css('background', db_color)
+            $('.span').css('background', `linear-gradient(90deg, #aaa, ${db_color})`)
+        });
+        $('.mute').on("click", function(){
+            setMute = def.getDs(1).split('/')[0];
+            if(setMute==0) def.showToast('Sorry the has been disable in sound setting');
+            $(".m1").toggleClass("hidden");
+            $(".m0").toggleClass("hidden");
+        });
+
+        var counter = 0, to = 33, mute = 1, ld = $("#ld"), rd = $("#rd");
+        $('.m1').on("click", function(){
+            mute = 0;
+            document.querySelectorAll("audio").forEach((e) => e.muted = true);
+        });
+        $('.m0').on("click", function(){
+            if(setMute == 0 ){
+                mute = 0;
+                document.querySelectorAll("audio").forEach((e) => e.muted = true);
+             }
+            else{
+                mute = 1;
+                document.querySelectorAll("audio").forEach((e) => e.muted = false);
+            }
+        });
+        function count(){
+            if(counter >= 99999) resets();
+            counter += 1;
+            rd.text(counter);
+            ld.text(parseInt(counter / to));
+            add.muted = (mute == 1) ? false : true;
+            (mute == 1)? add.play() : '';
+        }
+        function resets(){
+            counter = 0;
+            rd.text(counter);
+            ld.text(parseInt(counter / to));
+            err.muted = (mute == 1) ? false : true;
+            (mute == 1)? err.play() : '';
+        }
+        function set(){
+            $('#dis').toggleClass("hidden");
+            $('.d').toggleClass("disabled");
+            $('#display').toggleClass("hidden");
+            var too = $('input[name="set"]:checked').val();
+            if(too == '' || too == 0 || too == undefined || isNaN(too) ){
+                (mute == 1)? del.play() : '';
+                to = 100; del.muted = (mute == 1) ? false : true;
+            }
+            else{
+                to = too; suc.muted = (mute == 1) ? false : true;
+                (mute == 1)? suc.play() : '';
+            }
+        }
+    </script>
+</body>
+</html>

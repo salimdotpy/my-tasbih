@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Islamic Counter</title>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/color.css" rel="stylesheet">
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <style type="text/css">
+        *{
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        .title{
+            padding:3em 0
+        }
+        .container>div{
+            border-radius:15px;
+            padding:20px;border: solid blue 1px;
+            margin: 0 0 1em 0;
+        }
+        .containe>div:hover{
+            background:#eee;
+        }
+        .switch {
+            position: relative; display: inline-block; width: 50px; height: 27px;
+        }
+        .switch input {
+            display:none;
+        }
+        .slider {
+            position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; -webkit-transition: .4s; transition: .4s;
+        }
+        .slider:before {
+            position: absolute; content: ""; height: 20px; width: 20px; left: 4px; bottom: 4px; background-color: white; -webkit-transition: .4s; transition: .4s;
+        }
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+        input:focus + .slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+        input:checked + .slider:before { background:#00f;
+            -webkit-transform: translateX(22px);
+            -ms-transform: translateX(22px); transform: translateX(22px);
+        }
+
+        /* Rounded sliders */
+        .slider:before{ background:#fff; }
+        .slider.round {
+            border-radius: 34px;
+        }
+        .slider.round:before {
+            border-radius: 50%;
+         }
+        div.item{
+            border-top: solid 1px #ccc;
+            padding:1.3em 0 .9em 0;
+        }
+        div.item:first-child{
+            margin-top:1.4em;
+        }
+        div.item:last-child{
+            padding-bottom:0;
+        }
+    </style>
+</head>
+    <body>
+    <div class="title blue text-center">
+        <img src="ic.png" width="80"><br>
+        <b class="h2 white-text">Tasbih Counter</b>
+    </div>
+    <br/>
+    <div class="container">
+        <div class="" onclick="act()">
+            <span class="h4"><i class="fa fa-hand-o-up fa-fw"></i> Activation mode</span>
+            <label class="switch pull-right"> <input type="checkbox" id="act" checked>
+                <div class="slider round"></div>
+            </label>
+        </div>
+        <div class="" onclick="sound()">
+            <span class="h4"><i class="fa fa-music fa-fw"></i> Sound setting </span>
+            <label class="switch pull-right"> <input type="checkbox" id="sound" checked>
+                <div class="slider round"></div>
+            </label>
+        </div>
+        <div class="">
+            <span class="h4"><i class="fa fa-image fa-fw"></i> Change Background </span>
+            <label class="pull-right">
+                <input type="color" id="color" value="#0000ff" onchange="setColor(this)">
+            </label>
+        </div>
+        <div>
+            <div class="dd">
+                <span class="h4">
+                    <i class="fa fa-comment-o fa-fw"></i> Feedback
+                    <i class="fa fa-chevron-down pull-right"></i>
+                </span>
+            </div>
+            <div class="items hidden" id="f">
+                <div class="item h5" onclick="def.FeedW()">
+                    <span>Via-whatsapp</span>
+                    <i class="green-text fa fa-whatsapp pull-right"></i>
+                </div>
+                <div class="item h5" onclick="def.FeedE()">
+                    <span>Via-mail</span>
+                    <i class="red-text fa fa-google pull-right"></i>
+                </div>
+            </div>
+        </div>
+        <div class="" onclick="def.Share('Thank you!')">
+            <span class="h4"><i class="fa fa-share-alt fa-fw"></i> Share app</span>
+        </div>
+        <div class="dd1" onclick="def.showToast('This app is developed by Selim Adekola')">
+            <span class="h4">
+                <i class="fa fa-question-circle fa-fw"></i> About
+                <i class="fa fa-chevron-down pull-right hidden"></i>
+            </span>
+        </div>
+        <div class="dd1" onclick="def.stops(''); def.logOut('App Exit...')">
+            <span class="h4">
+                <i class="fa fa-sign-out fa-fw"></i> Exit
+                <i class="fa fa-chevron-down pull-right hidden"></i>
+            </span>
+        </div>
+    </div>
+
+    <script src="js/jquery-1.11.1.js"></script>
+    <script src="js/bootstrap.js"></script>
+</body>
+</html>
+
+
+<script>
+        var db_color = def.getDs(2)? def.getDs(2) : '#ff0000';
+        $(document).ready(function() {
+            var sc = def.getDs(1).split('/')[0];
+            $('#color').val(db_color);
+            if(sc == 1) $("#sound").attr("checked", true);
+            else $("#sound").attr("checked", false);
+        });
+        $(".dd").click(function() {
+            $(".items").toggleClass('hidden');
+        });
+        function setColor(e) {
+            if (def.getDs(2) == "") def.setDs(''+$(e).val());
+            else def.editDs(2, ''+$(e).val());
+            db_color = def.getDs(2)
+        }
+        $(".dd1").click(function() {
+            $(".items1").toggleClass('hidden');
+        });
+        function sound(){
+            var s = $('input[id="sound"]:checked').val(), txt = '';
+            if(s != undefined) txt = '1';
+            else txt = '0';
+            var defs = def.editDs(1,txt+'/'+0);
+        }
+        function act(){
+            var e = $('input[id="act"]:checked').val();
+            if(e != undefined) def.starts();
+            else def.stops('hidden');
+        }
+    </script>

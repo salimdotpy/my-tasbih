@@ -1,0 +1,271 @@
+﻿/*=====================================================================================================================
+    Authour: Selim Adekola
+    100% Free To use For Personal And Commercial Use.
+    IN EXCHANGE JUST TELL PEOPLE ABOUT THIS WEBSITE
+=====================================================================================================================*/
+/* =============================================================
+   GENERAL STYLES
+=====================================================================================================================*/
+*{
+    box-sizing: border-box;
+}
+/*header, aside, section{*/
+    /*border: 1px solid #000;margin: 0 0 5px 0;*/
+/*}*/
+/*html, body{*/
+    /*overflow-x: hidden;*/
+/*}*/
+@keyframes fromLeft {
+    from{left: -100px; opacity: 0;}
+    to{left: 0; opacity: 1;}
+}
+body{
+    margin: 0;
+    padding: 0; overflow-x: hidden;
+}
+a, a:hover,a:focus,a:active{
+    text-decoration: none;
+}
+#user:hover,#toggle:hover,#toggle1:hover{
+    cursor: pointer;
+}
+.ul-css{list-style: none}
+header>.left-head{
+    margin-right: auto;
+    padding: 0 1.5em;
+}
+.right-head>ul{
+    padding-right: 1.5em;
+}
+/*====================================================================================================================
+   WINDOWS STYLES
+=====================================================================================================================*/
+@media only screen and (min-width: 600px){
+
+}
+@media (max-width: 990px) {
+    /*====================================================================================================================
+   ASIDE, NAV, HEADER, MENU STYLES
+=====================================================================================================================*/
+    aside.left-panel{
+        position: fixed;
+        max-height: calc(100vh - 70px);
+        top: 70px;
+        bottom: 0;
+        overflow: auto;
+        min-height: 100vh;
+        background: #191c24;
+        font-weight: normal; display: none;
+        padding: 0;
+        width: 244px; z-index: 1111;
+        float: left;
+    }
+    nav.nav>ul{
+        margin-bottom: 60px;
+        padding: 10px 0 0 0;
+        list-style: none; margin-block-start: 0;
+        margin-block-end: 0;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        padding-inline-start: 0;
+    }
+    nav.nav>ul>li{
+        padding: 0 20px 0 0
+    }
+    nav.nav>ul>li>a{
+        padding: 0.8rem 10px 0.8rem 1.188rem;
+    }
+    nav.nav>ul>li>a:hover,nav.nav>ul>li>a:focus,nav.nav>ul>li>a:active{
+        background: #aaa!important;
+        transition: background .4s ease;
+        border-left: solid 5px blue;
+    }
+    nav.nav>ul>li:first-child{
+        color: #fff;
+        padding: 0.8rem 10px 0.8rem 1.188rem;
+    }
+    .nav-header{display: none;  }
+    .nav-header-small{
+        font-size: 2em; padding-right: 1em;
+    }
+    #toggle{display: none}
+    .nav>ul>li>a{
+        border-radius: 0 100px 100px 0;
+        color: #fff; display: block;
+    }
+    .left-panel>.nav>ul>li>a>.fa{
+        line-height: 1;
+        background: rgba(108, 114, 147, 0.5);
+        padding: 7px;
+        border-radius: 100%;
+    }
+    .open aside.left-panel{
+        display: block;
+        animation: fromLeft .25s;
+    }
+    nav.nav>ul>li>ul>li>a{color: #fff;}
+    nav.nav>ul>li>ul.dropdown-menu{
+        position: static;
+        background: #000!important;
+        float: none;
+    }
+    .right-panel>header{
+        padding: 19px;
+        top: 0;
+        width: 100%;
+        height: 70px;
+        position: fixed; z-index: 1111;
+        background: rgb(0,0,0);
+        display: flex;
+        align-items: center !important;
+    }
+    header>.left-head,header>.right-head{
+        display: flex;
+    }
+    /*====================================================================================================================
+       SECTION STYLES
+    =====================================================================================================================*/
+    section.right-panel{
+        max-width: 100%;
+        width: 100%;
+        float: left; z-index: -1;
+        position: relative;
+    }
+    .wrapper{
+        padding: 1.875rem 1.75rem;
+        margin-top:  7rem;
+    }
+    #user:hover,#toggle:hover{cursor: pointer}
+}
+/*(max-width: 991px)*/
+@media only screen and (min-width: 991px){
+    /*====================================================================================================================
+   ASIDE, NAV, HEADER, MENU STYLES
+=====================================================================================================================*/
+    aside.left-panel{
+        min-height: 100vh;
+        background: #000;
+        font-weight: normal;
+        position: fixed;  z-index: 1111;
+        padding: 0;
+        width: 17.18%;
+        float: left;
+        transition: width 0.25s ease, background 0.25s ease;
+    }
+    nav.nav>ul{
+        margin-bottom: 60px;
+        padding: 10px 0 0 0;
+        list-style: none; margin-block-start: 0;
+        margin-block-end: 0;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        padding-inline-start: 0;
+    }
+    nav.nav>ul>li{
+        padding: 0 20px 0 0
+    }
+    nav.nav>ul>li>a{
+        padding: 0.8rem 10px 0.8rem 1.188rem;
+    }
+    nav.nav>ul>li>a:hover,nav.nav>ul>li>a:focus,nav.nav>ul>li>a:active{
+        background: #aaa!important;
+        transition: background .4s ease;
+        border-left: solid 5px blue;
+    }
+    nav.nav>ul>li>ul>li>a{color: #fff;}
+    nav.nav>ul>li>ul.dropdown-menu{
+        position: static;
+        background: #000!important;
+        float: none;
+    }
+    nav.nav>ul>li:first-child{
+        color: #fff;
+        padding: 0.8rem 10px 0.8rem 1.188rem;
+    }
+    .nav-header{
+        padding: 20px;
+        font-size: 30px;
+        width: 244px;
+        height: 70px
+    }.nav-header-small{display: none}
+     #toggle1{
+         display: none;
+     }
+    .nav-header>a,.nav>ul>li>a{
+        border-radius: 0px 100px 100px 0px;
+        color: #fff; display: block;
+    }
+    .left-panel>.nav>ul>li>a>.fa{
+        line-height: 1;
+        background: rgba(108, 114, 147, 0.5);
+        padding: 7px;
+        border-radius: 100%;
+    }
+    .open .left-panel>.nav>ul>li>a{
+        font-size: 0;
+    }
+    .open .left-panel>.nav>ul>li>a>.fa{
+        font-size: 20px;
+    }
+    .open aside.left-panel{
+        width: 70px;
+    }
+    .open .nav-header>a{
+        visibility: hidden;
+    }
+    .open .nav-header>a:before{
+        visibility: visible;
+        content: "A";
+        color: #fff;
+    }
+    .open nav.nav>ul>li{
+        padding: 0;
+    }
+    .open nav.nav>ul>li:first-child{
+        display: none;
+    }
+    .open .right-panel>header{
+        width: calc(100% - 70px);
+        left: 70px;
+    }
+    .open nav.nav>ul>li>ul.dropdown-menu{
+        margin-left: 4.9em; margin-top: -3.5em; position: absolute;
+        border: solid #aaa 1px;
+        box-shadow: inset 5px 5px 5px #bbb, 5px 5px 5px #eee;
+    }
+    .open nav.nav>ul>li.dropdown:hover .dropdown-menu{
+        display: block;
+    }
+    .right-panel>header{
+        padding: 19px;
+        left: 17.18%; top: 0;
+        width: 82.85%;
+        height: 70px; z-index: 1111;
+        position: fixed;
+        background: rgb(0,0,0);
+        display: flex;
+        align-items: center;
+    }
+    header>.left-head,header>.right-head{
+        display: flex;
+        vertical-align: middle;
+    }
+    /*====================================================================================================================
+       SECTION STYLES
+    =====================================================================================================================*/
+    section.right-panel{
+        transition: width 0.25s ease, magin 0.25s ease;
+        width: 82.85%;
+        left: 17.18%;
+        float: left;
+        position: relative;
+    }
+    .wrapper{
+        padding: 1.875rem 1.75rem;
+        margin-top:  7rem;
+    }
+    .open section.right-panel{
+        width: calc(100% - 70px);
+        left: 70px;
+    }
+}
